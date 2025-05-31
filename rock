@@ -1,0 +1,99 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyO2b65iqrGVxVfw1fY6v8gY",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/KallaLokesh/rockpaper/blob/main/rock\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "nDDcydhDhKFM",
+        "outputId": "561727a1-15c5-4a54-8680-eccf7aa8b00b"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Welcome to Rock-Paper-Scissors!\n",
+            "Choose rock, paper, or scissors (or type 'quit' to exit): Rock\n",
+            "Computer chose: paper\n",
+            "Computer wins!\n",
+            "\n",
+            "Choose rock, paper, or scissors (or type 'quit' to exit): paper\n",
+            "Computer chose: scissors\n",
+            "Computer wins!\n",
+            "\n",
+            "Choose rock, paper, or scissors (or type 'quit' to exit): Scissors\n",
+            "Computer chose: paper\n",
+            "You win!\n",
+            "\n"
+          ]
+        }
+      ],
+      "source": [
+        "import random\n",
+        "\n",
+        "def get_computer_choice():\n",
+        "    return random.choice(['rock', 'paper', 'scissors'])\n",
+        "\n",
+        "def get_winner(player, computer):\n",
+        "    if player == computer:\n",
+        "        return \"It's a tie!\"\n",
+        "    elif (\n",
+        "        (player == 'rock' and computer == 'scissors') or\n",
+        "        (player == 'scissors' and computer == 'paper') or\n",
+        "        (player == 'paper' and computer == 'rock')\n",
+        "    ):\n",
+        "        return \"You win!\"\n",
+        "    else:\n",
+        "        return \"Computer wins!\"\n",
+        "\n",
+        "def play_game():\n",
+        "    print(\"Welcome to Rock-Paper-Scissors!\")\n",
+        "    while True:\n",
+        "        player_choice = input(\"Choose rock, paper, or scissors (or type 'quit' to exit): \").lower()\n",
+        "        if player_choice == 'quit':\n",
+        "            print(\"Thanks for playing!\")\n",
+        "            break\n",
+        "        elif player_choice not in ['rock', 'paper', 'scissors']:\n",
+        "            print(\"Invalid choice. Try again.\")\n",
+        "            continue\n",
+        "\n",
+        "        computer_choice = get_computer_choice()\n",
+        "        print(f\"Computer chose: {computer_choice}\")\n",
+        "        result = get_winner(player_choice, computer_choice)\n",
+        "        print(result)\n",
+        "        print()\n",
+        "\n",
+        "play_game()"
+      ]
+    }
+  ]
+}
