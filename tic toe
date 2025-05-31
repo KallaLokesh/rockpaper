@@ -1,0 +1,139 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyMlEfOhxf7RQeu8MjvOkPjS",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/KallaLokesh/rockpaper/blob/main/tic%20toe\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "C-0QrQdIrrYq",
+        "outputId": "9436836c-dc68-438a-8632-ae02bc458b93"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Welcome to Tic-Tac-Toe!\n",
+            "  |   |  \n",
+            "-----\n",
+            "  |   |  \n",
+            "-----\n",
+            "  |   |  \n",
+            "-----\n",
+            "Player X, enter row (0, 1, 2): 2\n",
+            "Player X, enter column (0, 1, 2): 1\n",
+            "  |   |  \n",
+            "-----\n",
+            "  |   |  \n",
+            "-----\n",
+            "  | X |  \n",
+            "-----\n",
+            "Player O, enter row (0, 1, 2): 2\n",
+            "Player O, enter column (0, 1, 2): 0\n",
+            "  |   |  \n",
+            "-----\n",
+            "  |   |  \n",
+            "-----\n",
+            "O | X |  \n",
+            "-----\n",
+            "Player X, enter row (0, 1, 2): 1\n",
+            "Player X, enter column (0, 1, 2): 2\n",
+            "  |   |  \n",
+            "-----\n",
+            "  |   | X\n",
+            "-----\n",
+            "O | X |  \n",
+            "-----\n"
+          ]
+        }
+      ],
+      "source": [
+        "def print_board(board):\n",
+        "    for row in board:\n",
+        "        print(\" | \".join(row))\n",
+        "        print(\"-\" * 5)\n",
+        "\n",
+        "def check_winner(board, player):\n",
+        "    # Check rows, columns, and diagonals\n",
+        "    for row in board:\n",
+        "        if all(s == player for s in row):\n",
+        "            return True\n",
+        "    for col in range(3):\n",
+        "        if all(board[row][col] == player for row in range(3)):\n",
+        "            return True\n",
+        "    if all(board[i][i] == player for i in range(3)) or \\\n",
+        "       all(board[i][2 - i] == player for i in range(3)):\n",
+        "        return True\n",
+        "    return False\n",
+        "\n",
+        "def is_full(board):\n",
+        "    return all(cell != \" \" for row in board for cell in row)\n",
+        "\n",
+        "def tic_tac_toe():\n",
+        "    board = [[\" \" for _ in range(3)] for _ in range(3)]\n",
+        "    current_player = \"X\"\n",
+        "\n",
+        "    print(\"Welcome to Tic-Tac-Toe!\")\n",
+        "    print_board(board)\n",
+        "\n",
+        "    while True:\n",
+        "        try:\n",
+        "            row = int(input(f\"Player {current_player}, enter row (0, 1, 2): \"))\n",
+        "            col = int(input(f\"Player {current_player}, enter column (0, 1, 2): \"))\n",
+        "        except ValueError:\n",
+        "            print(\"Invalid input! Please enter numbers between 0 and 2.\")\n",
+        "            continue\n",
+        "\n",
+        "        if row not in range(3) or col not in range(3):\n",
+        "            print(\"Invalid coordinates! Please choose values between 0 and 2.\")\n",
+        "            continue\n",
+        "        if board[row][col] != \" \":\n",
+        "            print(\"Cell already taken! Choose another one.\")\n",
+        "            continue\n",
+        "\n",
+        "        board[row][col] = current_player\n",
+        "        print_board(board)\n",
+        "\n",
+        "        if check_winner(board, current_player):\n",
+        "            print(f\"🎉 Player {current_player} wins!\")\n",
+        "            break\n",
+        "        elif is_full(board):\n",
+        "            print(\"It's a draw!\")\n",
+        "            break\n",
+        "\n",
+        "        current_player = \"O\" if current_player == \"X\" else \"X\"\n",
+        "\n",
+        "# Run the game\n",
+        "tic_tac_toe()"
+      ]
+    }
+  ]
+}
